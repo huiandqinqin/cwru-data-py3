@@ -21,7 +21,7 @@ rf_model.fit(X_train, y_train)
 ## Arguments
 CWRU has four arguments:
 - exp: experiment, supporting "12DriveEndFault", "12FanEndFault", "48DriveEndFault"
-- rpm: rpm during testing
+- rpm: rpm during testing, supporting '1797', '1772', '1750', '1730'
 - length: length of the signal slice, namely X_train.shape[1]
 - directory： -1 means parent_dir， 1 means current_dir
   ``` python
@@ -34,3 +34,5 @@ CWRU has four arguments:
       ---A.py
       ---DataSet/
    ```
+ ## thanks 
+ https://github.com/Litchiware/cwru

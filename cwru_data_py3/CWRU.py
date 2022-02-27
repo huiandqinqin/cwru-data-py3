@@ -8,8 +8,7 @@ from scipy.io import loadmat
 
 
 class CWRU:
-
-    def __init__(self, exp, rpm, length, getCwd):
+    def __init__(self, exp, rpm, length, getCwd, common = 1):
         if exp not in ('12DriveEndFault', '12FanEndFault', '48DriveEndFault'):
             print( "wrong experiment name: {}".format(exp))
             exit(1)
@@ -19,6 +18,8 @@ class CWRU:
         if getCwd not in (1, -1):
             print( "wrong targe directory value: {}，1 current_dir and -1 parent_dir".format(rpm))
             exit(1)
+        if common not in (1, -1):
+            print( "wrong format value: {}".format(common))
 
         # root directory of all data
         current_dir = os.getcwd()
@@ -29,9 +30,10 @@ class CWRU:
         rdir = os.path.join(parent_dir,
                             'Datasets/CWRU',
                             )
-
-        fmeta = os.path.join(os.path.dirname(__file__), 'metadata.txt')
-        all_lines = open(fmeta).readlines()
+        fmeta = os.path.join(os.path.dirname(__file__), 'metadata_common.txt')
+        if common == -1:# -1 是所有的cwru数据集
+            fmeta = os.path.join(os.path.dirname(__file__), 'metadata.txt')
+        all_lines = open(fmeta)
         lines = []
         for line in all_lines:
             l = line.split()
